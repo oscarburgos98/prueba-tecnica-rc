@@ -1,0 +1,11 @@
+#Version de php que se requiere para el proyecto
+FROM php:7.2.2-apache
+
+#Instala las dependencias de laravel que se define en composer.json
+RUN apt-get update -y && apt-get install -y libmcrypt-dev openssl
+RUN docker-php-ext-install pdo mcrypt mbstring
+
+
+#Descarga de composer si el entorno no lo tiene
+RUN apt-get -y curl
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
